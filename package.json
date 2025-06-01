@@ -1,0 +1,26 @@
+{
+  "name": "xyz-logistics",
+  "version": "1.0.0",
+  "description": "XYZ Logistics App with Cognito Authentication",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.817.0",
+    "@aws-sdk/client-s3": "^3.820.0",
+    "@aws-sdk/client-sqs": "^3.817.0",
+    "@aws-sdk/lib-dynamodb": "^3.817.0",
+    "aws-sdk": "^2.1692.0",
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "exceljs": "^4.4.0",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "multer": "^2.0.0",
+    "openid-client": "^5.7.1",
+    "uuid": "^11.1.0"
+  }
+}
