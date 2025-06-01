@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logistics Company</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+        }
+        .btn-primary {
+            background: linear-gradient(to right, #3b82f6, #1e40af);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-white">
+    <div class="w-full max-w-lg p-8 bg-white rounded-2xl shadow-xl card fade-in">
+        <h1 class="text-4xl font-bold text-gray-900 text-center mb-6">Logistics Company</h1>
+        <% if (message) { %>
+            <p class="text-red-500 text-center mb-6 animate-pulse"><%= message %></p>
+        <% } %>
+        <% if (isAuthenticated) { %>
+            <p class="text-gray-600 text-center mb-6">Welcome, <%= userInfo.email %></p>
+            <div class="flex flex-col items-center space-y-4">
+                <% if (userInfo.isAdmin) { %>
+                    <a href="/admin" class="btn-primary text-white text-center py-3 px-6 rounded-xl shadow-md w-full">Admin Dashboard</a>
+                <% } else { %>
+                    <a href="/client" class="btn-primary text-white text-center py-3 px-6 rounded-xl shadow-md w-full">Client Dashboard</a>
+                <% } %>
+                <a href="/logout" class="text-blue-600 text-center py-3 px-6 rounded-xl border border-blue-600 hover:bg-blue-50 w-full">Logout</a>
+            </div>
+        <% } else { %>
+<br><br><center><a href="/login" class="btn-primary text-white text-center py-3 px-6 rounded-xl shadow-md w-full">Login</a></center>
+        <% } %>
+    </div>
+</body>
+</html>

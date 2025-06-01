@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard - Logistics Upload System</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+        }
+        .btn-primary {
+            background: linear-gradient(to right, #3b82f6, #1e40af);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-white">
+    <div class="w-full max-w-4xl p-8">
+        <h1 class="text-4xl font-bold text-gray-900 text-center mb-6 fade-in">Client Dashboard</h1>
+        <p class="text-gray-600 text-center mb-6 fade-in">Welcome, <%= userInfo.email %></p>
+        <% if (message) { %>
+            <p class="text-red-500 text-center mb-6 animate-pulse"><%= message %></p>
+        <% } %>
+        <div class="bg-white p-6 rounded-2xl shadow-xl card mb-8 fade-in">
+            <h2 class="text-2xl font-semibold text-gray-900 mb-4 text-center">Upload Excel File</h2>
+            <form action="/upload" method="POST" enctype="multipart/form-data" class="space-y-4 max-w-md mx-auto">
+                <div>
+                    <label for="company" class="block text-sm font-medium text-gray-600">Select Company</label>
+                    <select id="company" name="company" required class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">Select a company</option>
+                        <% companies.forEach(company => { %>
+                            <option value="<%= company.companyId %>"><%= company.companyName %></option>
+                        <% }); %>
+                    </select>
+                </div>
+                <div>
+                    <label for="excelFile" class="block text-sm font-medium text-gray-600">Select Excel File</label>
+                    <input type="file" id="excelFile" name="excelFile" accept=".xlsx,.xls" required class="w-full p-3 border border-gray-300 rounded-xl file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100">
+                </div>
+                <button type="submit" class="btn-primary text-white py-3 px-6 rounded-xl shadow-md w-full">Upload</button>
+            </form>
+        </div>
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4 text-center fade-in">Uploaded Files</h2>
+        <div id="fileList" class="grid gap-4"></div>
+        <div class="text-center mt-8">
+            <a href="/logout" class="btn-primary text-white py-3 px-6 rounded-xl shadow-md inline-block">Logout</a>
+        </div>
+    </div>
+    <script src="/client.js"></script>
+</body>
+</html>
